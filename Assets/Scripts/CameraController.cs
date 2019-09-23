@@ -21,18 +21,14 @@ public class CameraController : MonoBehaviour
         defaultSize = camera.orthographicSize;
     }
 
-    // Update is called once per frame
-    void Update()
+    void updatePosition(Vector3 center)
     {
-        
-    }
-
-    void FixedUpdate() 
-    {
-        var center = ballController.transform.position;
         center.z = this.transform.position.z;
         this.transform.position = center;
+    }
 
+    void updateSize(Vector3 center)
+    {
         if (center.y > borderToIncreaseSize)
         {
            maxSize = center.y + defaultSize;
@@ -47,5 +43,15 @@ public class CameraController : MonoBehaviour
             camera.orthographicSize -= increase;
         }
 
+    }
+
+    void FixedUpdate() 
+    {
+        if (ballController)
+        {
+            var center = ballController.transform.position;
+            updatePosition(center);
+            updateSize(center);
+        }
     }
 }

@@ -15,8 +15,6 @@ public class BallController : MonoBehaviour
 
     bool addForce;
 
-    [SerializeField] AnimationCurve ac;
-
     void Awake()
     {
         collider = this.GetComponent<CircleCollider2D>();
@@ -24,9 +22,7 @@ public class BallController : MonoBehaviour
 
         lineRenderer = this.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
-        lineRenderer.widthCurve = ac;
         addForce = false;
-
     }
 
     void Update()
@@ -36,33 +32,43 @@ public class BallController : MonoBehaviour
 
         if (!clickOnMe && Input.GetKeyDown(KeyCode.Mouse0) && collider.bounds.Contains(pos))
         {
-            rigidbody.simulated = false;
-            clickOnMe = true;
-
-            startDragPoint = pos;
-            
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.angularVelocity = 0;
-
-            lineRenderer.positionCount = 2;
-            lineRenderer.SetPosition(0, this.transform.position);
-            lineRenderer.enabled = true;
+            startClick(pos);
 
         }
         else if (clickOnMe && Input.GetKeyUp(KeyCode.Mouse0) && rigidbody.simulated == false)
         {
-            rigidbody.simulated = true;
-            clickOnMe = false;
-
-            addForce = true;
-            lineRenderer.enabled = false;
-            lineRenderer.positionCount = 0;
+            finishClick();
         }
 
         if (clickOnMe)
             lineRenderer.SetPosition(1, pos);
 
         endDragPoint = pos;
+    }
+
+    void finishClick()
+    {
+        rigidbody.simulated = true;
+        clickOnMe = false;
+
+        addForce = true;
+        lineRenderer.enabled = false;
+        lineRenderer.positionCount = 0;
+    }
+
+    void startClick(Vector3 pos)
+    {
+        rigidbody.simulated = false;
+        clickOnMe = true;
+
+        startDragPoint = pos;
+        
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = 0;
+
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPosition(0, this.transform.position);
+        lineRenderer.enabled = true;
     }
 
     void FixedUpdate()
