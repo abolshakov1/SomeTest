@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5428095101687646668}
   - component: {fileID: 5428095101687646641}
   - component: {fileID: 5428095101687646646}
+  - component: {fileID: 564711956022580916}
   m_Layer: 0
   m_Name: PlayerBall
   m_TagString: Player
@@ -97,33 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57837b40fc887c48ad334d2b011d39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickOnMe: 0
+  slowmotionOn: 0
   startDragPoint: {x: 5.785488, y: -2.8808508, z: 0}
   endDragPoint: {x: 15.763094, y: 0.53587747, z: 0}
-  ac:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -0.015386581
-      value: 0.13119507
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.2758789
-      value: 0.45365715
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
-    m_RotationOrder: 4
 --- !u!50 &5428095101687646669
 Rigidbody2D:
   serializedVersion: 4
@@ -387,3 +364,20 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &564711956022580916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428095101687646671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a4169e5527941438caabb1809abdf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyObjectTags: []
+  destinationObjectTags: []
+  slowmotionTime: 0
+  dieOnTimeEnds: 0
+  currentTime: 0

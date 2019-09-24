@@ -6,9 +6,7 @@ public class BallController : MonoBehaviour
 {   
     CircleCollider2D collider;
     Rigidbody2D rigidbody;
-
-    public bool clickOnMe;
-
+    public bool slowmotionOn;
     public Vector3 startDragPoint;
     public Vector3 endDragPoint;
     LineRenderer lineRenderer;
@@ -30,17 +28,17 @@ public class BallController : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var pos =  new Vector3(mousePos.x, mousePos.y, this.transform.position.z);
 
-        if (!clickOnMe && Input.GetKeyDown(KeyCode.Mouse0) && collider.bounds.Contains(pos))
+        if (!slowmotionOn && Input.GetKeyDown(KeyCode.Mouse0) && collider.bounds.Contains(pos))
         {
             startClick(pos);
 
         }
-        else if (clickOnMe && Input.GetKeyUp(KeyCode.Mouse0) && rigidbody.simulated == false)
+        else if (slowmotionOn && Input.GetKeyUp(KeyCode.Mouse0) && rigidbody.simulated == false)
         {
             finishClick();
         }
 
-        if (clickOnMe)
+        if (slowmotionOn)
             lineRenderer.SetPosition(1, pos);
 
         endDragPoint = pos;
@@ -49,7 +47,7 @@ public class BallController : MonoBehaviour
     void finishClick()
     {
         rigidbody.simulated = true;
-        clickOnMe = false;
+        slowmotionOn = false;
 
         addForce = true;
         lineRenderer.enabled = false;
@@ -59,7 +57,7 @@ public class BallController : MonoBehaviour
     void startClick(Vector3 pos)
     {
         rigidbody.simulated = false;
-        clickOnMe = true;
+        slowmotionOn = true;
 
         startDragPoint = pos;
         

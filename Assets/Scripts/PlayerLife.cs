@@ -2,21 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerLife : MonoBehaviour
 {
     Rigidbody2D rigidbody;
     CircleCollider2D collider2D;
+    BallController ballController;
+    
+    [SerializeField]
+    List<string> destroyObjectTags;
+    
+    [SerializeField]
+    List<string> destinationObjectTags;
+    
+    [SerializeField]
+    float slowmotionTime;
+    
+    [SerializeField]
+    bool dieOnTimeEnds;
+
+    float currentTime;
+
+    [SerializeField]
+    Slider timeSlider;
+    
 
     void Awake()
     {
         rigidbody = this.GetComponent<Rigidbody2D>();
         collider2D = this.GetComponent<CircleCollider2D>();
+        ballController = this.GetComponent<BallController>();
+        currentTime = slowmotionTime;
+
+        timeSlider.maxValue = timeSlider.value = currentTime;
     }
 
     void Update()
     {
-        
+        if (dieOnTimeEnds && ballController.slowmotionOn)
+        {
+            changeTimeLeft(-Time.deltaTime);
+        }
+
+        if (currentTime <= 0)
+        {
+            destroy();
+            reloadLevel();
+        }
+    }
+
+    void changeTimeLeft(float delta)
+    {
+        currentTime += delta;
+        timeSlider.value = currentTime;
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -45,7 +84,6 @@ public class PlayerLife : MonoBehaviour
 
     void levelSuccess()
     {   
-
         // Application.LoadLevel(Application.loadedLevel);
     }
 
