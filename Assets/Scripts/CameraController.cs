@@ -8,22 +8,33 @@ public class CameraController : MonoBehaviour
     GameObject playerBall;
     Camera camera;
 
-    public float borderToIncreaseSize;
-    public float defaultSize;
-    public float maxSize;
-    public float increase;
+    [SerializeField]
+    float borderToIncreaseSize;
+    [SerializeField]
+    float increase;
+    [SerializeField]
+    float xOffset;
+    [SerializeField]
+    float yOffset;
 
+    float defaultOrthoSize;
+    float maxOrthoSize;
+    
+    
     void Awake()
     {
         playerBall = GameObject.FindGameObjectWithTag("Player");
         ballController = playerBall.GetComponent<BallController>();
         camera = this.GetComponent<Camera>();
-        defaultSize = camera.orthographicSize;
+        defaultOrthoSize = camera.orthographicSize;
     }
 
     void updatePosition(Vector3 center)
     {
         center.z = this.transform.position.z;
+        center.x += xOffset;
+        center.y += yOffset;
+        
         this.transform.position = center;
     }
 
@@ -31,14 +42,14 @@ public class CameraController : MonoBehaviour
     {
         if (center.y > borderToIncreaseSize)
         {
-           maxSize = center.y + defaultSize;
-           if (camera.orthographicSize < maxSize)
+           maxOrthoSize = center.y + defaultOrthoSize;
+           if (camera.orthographicSize < maxOrthoSize)
            {
                 camera.orthographicSize += increase;
            }
         }
 
-        if (center.y < borderToIncreaseSize && camera.orthographicSize > defaultSize) 
+        if (center.y < borderToIncreaseSize && camera.orthographicSize > defaultOrthoSize) 
         {
             camera.orthographicSize -= increase;
         }

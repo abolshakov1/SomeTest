@@ -20,34 +20,48 @@ public class PlayerLife : MonoBehaviour
     float slowmotionTime;
     
     [SerializeField]
+    Slider timeSlider;
+
+    [SerializeField]
+    Rect gameBounds;
+
+    [SerializeField]
     bool dieOnTimeEnds;
 
     float currentTime;
-
-    [SerializeField]
-    Slider timeSlider;
-    
 
     void Awake()
     {
         rigidbody = this.GetComponent<Rigidbody2D>();
         collider2D = this.GetComponent<CircleCollider2D>();
         ballController = this.GetComponent<BallController>();
-        currentTime = slowmotionTime;
+        
 
-        timeSlider.maxValue = timeSlider.value = currentTime;
+        if (dieOnTimeEnds)
+        {
+            currentTime = slowmotionTime;
+            timeSlider.maxValue = timeSlider.value = currentTime;
+        }
     }
 
     void Update()
-    {
-        if (dieOnTimeEnds && ballController.slowmotionOn)
+    {   
+        if (dieOnTimeEnds)
         {
-            changeTimeLeft(-Time.deltaTime);
+            if (ballController.slowmotionOn)
+            {
+                changeTimeLeft(-Time.deltaTime);
+            }
+
+            if ( currentTime <= 0)
+            {
+                destroy();
+                reloadLevel();
+            }
         }
 
-        if (currentTime <= 0)
+        if (!gameBounds.Contains(this.transform.position))
         {
-            destroy();
             reloadLevel();
         }
     }
@@ -85,6 +99,11 @@ public class PlayerLife : MonoBehaviour
     void levelSuccess()
     {   
         // Application.LoadLevel(Application.loadedLevel);
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        
     }
 
 }

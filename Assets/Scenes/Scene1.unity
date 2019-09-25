@@ -561,6 +561,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5428095101687646640, guid: 61337d3adc5e87c45a5ffc948a0f9405,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428095101687646640, guid: 61337d3adc5e87c45a5ffc948a0f9405,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428095101687646640, guid: 61337d3adc5e87c45a5ffc948a0f9405,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 5428095101687646642, guid: 61337d3adc5e87c45a5ffc948a0f9405,
         type: 3}
       propertyPath: ac.m_Curve.Array.data[0].inSlope
