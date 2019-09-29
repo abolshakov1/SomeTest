@@ -60,10 +60,10 @@ public class PlayerLife : MonoBehaviour
             }
         }
 
-        if (!gameBounds.Contains(this.transform.position))
-        {
-            reloadLevel();
-        }
+        // if (!gameBounds.Contains(this.transform.position))
+        // {
+        //     reloadLevel();
+        // }
     }
 
     void changeTimeLeft(float delta)
@@ -78,9 +78,10 @@ public class PlayerLife : MonoBehaviour
 
         if (tag == "DestroyFloor")
         {
-            destroy();    
+            destroy();   
+            reloadLevel(); 
         }
-        else if (tag == "Destination")
+        else if (tag == "Finish")
         {
             reloadLevel();
         }
@@ -99,11 +100,6 @@ public class PlayerLife : MonoBehaviour
     void levelSuccess()
     {   
         // Application.LoadLevel(Application.loadedLevel);
-    }
-
-    private void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        
     }
 
 }

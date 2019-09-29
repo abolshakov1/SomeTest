@@ -13,6 +13,9 @@ public class BallController : MonoBehaviour
 
     bool addForce;
 
+    [SerializeField]
+    bool autoStart;
+
     void Awake()
     {
         collider = this.GetComponent<CircleCollider2D>();
@@ -21,6 +24,11 @@ public class BallController : MonoBehaviour
         lineRenderer = this.GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
         addForce = false;
+
+        if (!autoStart)
+        {
+            rigidbody.simulated = false;
+        }
     }
 
     void Update()
@@ -31,7 +39,6 @@ public class BallController : MonoBehaviour
         if (!slowmotionOn && Input.GetKeyDown(KeyCode.Mouse0) && collider.bounds.Contains(pos))
         {
             startClick(pos);
-
         }
         else if (slowmotionOn && Input.GetKeyUp(KeyCode.Mouse0) && rigidbody.simulated == false)
         {

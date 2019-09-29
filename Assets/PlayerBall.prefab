@@ -30,13 +30,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5428095101687646671}
-  m_LocalRotation: {x: 0, y: 0, z: -0.78022206, w: 0.6255027}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7802231, w: 0.6255014}
   m_LocalPosition: {x: 7.021377, y: -3.0158982, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -102.562004}
 --- !u!212 &5428095101687646643
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: deae8050edc8b3e47b2adc617a47e04b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 37d889e2a28d0884dab13a0f4f1d982f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54f3edc6efdc3bc4cad248685c0909ac, type: 3}
   m_Color: {r: 0.9056604, g: 0.5254539, b: 0.5254539, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -101,6 +101,7 @@ MonoBehaviour:
   slowmotionOn: 0
   startDragPoint: {x: 5.785488, y: -2.8808508, z: 0}
   endDragPoint: {x: 15.763094, y: 0.53587747, z: 0}
+  autoStart: 0
 --- !u!50 &5428095101687646669
 Rigidbody2D:
   serializedVersion: 4
@@ -116,7 +117,7 @@ Rigidbody2D:
   m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 6200000, guid: 01e75ccd8bd25f44c94a2ae448db9aa2, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -137,7 +138,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.36
 --- !u!96 &5428095101687646641
 TrailRenderer:
   serializedVersion: 2
@@ -186,7 +187,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.6315918
+        value: 0.6845028
         inSlope: -0.29687604
         outSlope: -0.29687604
         tangentMode: 0
@@ -194,22 +195,31 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.60115886
       - serializedVersion: 3
-        time: 0.49642763
-        value: 0.29474372
-        inSlope: -0.99251914
-        outSlope: -0.99251914
+        time: 0.32897767
+        value: 0.36880988
+        inSlope: -0.9736757
+        outSlope: -0.9736757
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.1960598
+        outWeight: 0.31591302
       - serializedVersion: 3
-        time: 0.9833088
-        value: 0
-        inSlope: 0
-        outSlope: 0
+        time: 0.6435538
+        value: 0.15873718
+        inSlope: -0.6636569
+        outSlope: -0.6636569
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.3737493
+        outWeight: 0.28982672
+      - serializedVersion: 3
+        time: 0.97368413
+        value: 0.04762663
+        inSlope: -0.15072165
+        outSlope: -0.15072165
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.32593367
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -378,6 +388,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyObjectTags: []
   destinationObjectTags: []
-  slowmotionTime: 0
-  dieOnTimeEnds: 0
-  currentTime: 0
+  slowmotionTime: 3
+  timeSlider: {fileID: 0}
+  gameBounds:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  dieOnTimeEnds: 1
