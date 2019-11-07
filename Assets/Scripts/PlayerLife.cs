@@ -9,18 +9,20 @@ public class PlayerLife : MonoBehaviour
     Rigidbody2D rigidbody;
     CircleCollider2D collider2D;
     BallController ballController;
-    
+
     [SerializeField]
     List<string> destroyObjectTags;
-    
+
     [SerializeField]
     List<string> destinationObjectTags;
-    
+
     [SerializeField]
     float slowmotionTime;
-    
-    [SerializeField]
-    Slider timeSlider;
+
+    [SerializeField] GameObject slider;
+
+    // [SerializeField]
+    // Slider timeSlider;
 
     [SerializeField]
     Rect gameBounds;
@@ -35,17 +37,17 @@ public class PlayerLife : MonoBehaviour
         rigidbody = this.GetComponent<Rigidbody2D>();
         collider2D = this.GetComponent<CircleCollider2D>();
         ballController = this.GetComponent<BallController>();
-        
+        slider.GetComponent<SliderController>().setInitValue(slowmotionTime);
 
         if (dieOnTimeEnds)
         {
             currentTime = slowmotionTime;
-            timeSlider.maxValue = timeSlider.value = currentTime;
+            // timeSlider.maxValue = timeSlider.value = currentTime;
         }
     }
 
     void Update()
-    {   
+    {
         if (dieOnTimeEnds)
         {
             if (ballController.slowmotionOn)
@@ -69,7 +71,8 @@ public class PlayerLife : MonoBehaviour
     void changeTimeLeft(float delta)
     {
         currentTime += delta;
-        timeSlider.value = currentTime;
+        slider.GetComponent<SliderController>().setValue(currentTime);
+        // timeSlider.value = currentTime;
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -78,8 +81,8 @@ public class PlayerLife : MonoBehaviour
 
         if (tag == "DestroyFloor")
         {
-            destroy();   
-            reloadLevel(); 
+            destroy();
+            reloadLevel();
         }
         else if (tag == "Finish")
         {
@@ -98,7 +101,7 @@ public class PlayerLife : MonoBehaviour
     }
 
     void levelSuccess()
-    {   
+    {
         // Application.LoadLevel(Application.loadedLevel);
     }
 
