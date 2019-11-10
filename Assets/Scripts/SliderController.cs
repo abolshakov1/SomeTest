@@ -8,29 +8,22 @@ public class SliderController : MonoBehaviour
     private float scale;
     private float time;
 
+    RectTransform rectTransform;
+
     void Awake()
     {
-       scale = this.transform.localScale.x;
+       rectTransform = GetComponent<RectTransform>();
+        scale = rectTransform.sizeDelta.x;
     }
 
     public void setInitValue(float time)
     {
         this.time = time;
     }
+
     public void setValue(float value)
     {
-      float newScale = value * scale / time;
-      this.transform.localScale = new Vector3(newScale, 0.3f, 1);
-    }
-
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        float newScale = value * scale / time;
+        rectTransform.sizeDelta = new Vector2(newScale, 0.1f);
     }
 }

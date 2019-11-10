@@ -20,9 +20,7 @@ public class PlayerLife : MonoBehaviour
     float slowmotionTime;
 
     [SerializeField] GameObject slider;
-
-    // [SerializeField]
-    // Slider timeSlider;
+    [SerializeField] List<string> dangerObjects;
 
     [SerializeField]
     Rect gameBounds;
@@ -31,6 +29,16 @@ public class PlayerLife : MonoBehaviour
     bool dieOnTimeEnds;
 
     float currentTime;
+
+    public int coins { get; private set; }
+
+    public void addCoins(int value=1)
+    {
+        coins += value;
+        uIManager.coinsChanged(coins);
+    }
+
+    public UIManager uIManager;
 
     void Awake()
     {
@@ -42,8 +50,9 @@ public class PlayerLife : MonoBehaviour
         if (dieOnTimeEnds)
         {
             currentTime = slowmotionTime;
-            // timeSlider.maxValue = timeSlider.value = currentTime;
         }
+
+        uIManager.coinsChanged(coins);
     }
 
     void Update()
@@ -79,7 +88,7 @@ public class PlayerLife : MonoBehaviour
     {
         var tag = other.gameObject.tag;
 
-        if (tag == "DestroyFloor")
+        if (dangerObjects.Contains(tag))
         {
             destroy();
             reloadLevel();
@@ -87,6 +96,16 @@ public class PlayerLife : MonoBehaviour
         else if (tag == "Finish")
         {
             reloadLevel();
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        var tag = other.gameObject.tag;
+        if (tag == "Coin")
+        {   
+            Destroy(other.gameObject);
+            addCoins();
         }
     }
 
