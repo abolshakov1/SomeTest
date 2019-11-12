@@ -70,18 +70,12 @@ public class PlayerLife : MonoBehaviour
                 reloadLevel();
             }
         }
-
-        // if (!gameBounds.Contains(this.transform.position))
-        // {
-        //     reloadLevel();
-        // }
     }
 
     void changeTimeLeft(float delta)
     {
         currentTime += delta;
         slider.GetComponent<SliderController>().setValue(currentTime);
-        // timeSlider.value = currentTime;
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -93,10 +87,6 @@ public class PlayerLife : MonoBehaviour
             destroy();
             reloadLevel();
         }
-        else if (tag == "Finish")
-        {
-            reloadLevel();
-        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -106,6 +96,11 @@ public class PlayerLife : MonoBehaviour
         {   
             Destroy(other.gameObject);
             addCoins();
+        }
+        else if (tag == "Finish")
+        {
+            Destroy(other.gameObject);
+            // reloadLevel();
         }
     }
 
