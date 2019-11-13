@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Text coinsText;
-    
+    public Text goalsText;
+
     private PlayerLife playerLife;
 
     void Start()
@@ -14,10 +15,13 @@ public class UIManager : MonoBehaviour
 
     }
 
-
-
     public void coinsChanged(int value)
     {
         coinsText.text = value.ToString();
     }
+
+    public void goalsChanged(int value)
+    {
+        goalsText.text = value.ToString();
+    }   
 }

@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class GoalGenerator : MonoBehaviour
 {   
+    [SerializeField] LevelSettings levelSettings;
+    
     [SerializeField] GameObject player;
     [SerializeField] GameObject goalPrefab;
 
-    [SerializeField] Rect instanceSquare;
 
     private GameObject goalInstance;
 
@@ -29,16 +30,9 @@ public class GoalGenerator : MonoBehaviour
 
     Vector2 choosePoint()
     {
-        float x = Random.Range(instanceSquare.xMin, instanceSquare.xMax);
-        float y = Random.Range(instanceSquare.yMin, instanceSquare.yMax);
+        float x = Random.Range(levelSettings.levelRect.xMin, levelSettings.levelRect.xMax);
+        float y = Random.Range(levelSettings.levelRect.yMin, levelSettings.levelRect.yMax);
 
         return new Vector2(x, y);
-    }
-
-    void OnDrawGizmos() 
-    {
-        Gizmos.color = Color.blue;
-
-        Gizmos.DrawWireCube((Vector3)instanceSquare.center, (Vector3)instanceSquare.size);    
     }
 }

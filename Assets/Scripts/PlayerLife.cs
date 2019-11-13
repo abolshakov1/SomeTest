@@ -6,15 +6,11 @@ using UnityEngine.UI;
 
 public class PlayerLife : MonoBehaviour
 {
-    Rigidbody2D rigidbody;
-    CircleCollider2D collider2D;
     BallController ballController;
 
-    [SerializeField]
-    List<string> destroyObjectTags;
+    [SerializeField] List<string> destroyObjectTags;
 
-    [SerializeField]
-    List<string> destinationObjectTags;
+    [SerializeField] List<string> destinationObjectTags;
 
     [SerializeField]
     float slowmotionTime;
@@ -22,28 +18,25 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] GameObject slider;
     [SerializeField] List<string> dangerObjects;
 
-    [SerializeField]
-    Rect gameBounds;
+    [SerializeField] bool dieOnTimeEnds;
 
-    [SerializeField]
-    bool dieOnTimeEnds;
+    [SerializeField] float onGoalTakeBoost;
 
     float currentTime;
 
     public int coins { get; private set; }
+    public int goals { get; private set; }
 
-    public void addCoins(int value=1)
-    {
-        coins += value;
-        uIManager.coinsChanged(coins);
-    }
+    // public void addCoins(int value=1)
+    // {
+    //     coins += value;
+    //     uIManager.coinsChanged(coins);
+    // }
 
     public UIManager uIManager;
 
     void Awake()
     {
-        rigidbody = this.GetComponent<Rigidbody2D>();
-        collider2D = this.GetComponent<CircleCollider2D>();
         ballController = this.GetComponent<BallController>();
         slider.GetComponent<SliderController>().setInitValue(slowmotionTime);
 
@@ -52,7 +45,7 @@ public class PlayerLife : MonoBehaviour
             currentTime = slowmotionTime;
         }
 
-        uIManager.coinsChanged(coins);
+        // uIManager.coinsChanged(coins);
     }
 
     void Update()
@@ -95,12 +88,18 @@ public class PlayerLife : MonoBehaviour
         if (tag == "Coin")
         {   
             Destroy(other.gameObject);
-            addCoins();
+            
+            // addCoins();
         }
         else if (tag == "Finish")
         {
             Destroy(other.gameObject);
-            // reloadLevel();
+            currentTime += onGoalTakeBoost;
+            slider.GetComponent<SliderController>().setValue(currentTime);
+            
+            goals++;
+
+            uIManager.goalsChanged(goals);
         }
     }
 
@@ -113,10 +112,4 @@ public class PlayerLife : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    void levelSuccess()
-    {
-        // Application.LoadLevel(Application.loadedLevel);
-    }
-
 }

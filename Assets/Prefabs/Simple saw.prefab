@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1660660361621158095}
+  - component: {fileID: 2717463118260313494}
   m_Layer: 0
   m_Name: Simple saw
   m_TagString: Untagged
@@ -33,6 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2717463118260313494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071666142196837211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b73316f1131064c903d635f2d9b842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  first: {fileID: 1710897508372057063}
+  second: {fileID: 6290514681654447611}
 --- !u!1 &1710897508372057063
 GameObject:
   m_ObjectHideFlags: 0
